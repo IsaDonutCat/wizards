@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "ndoe": "^0.0.0",
+    "node": "^25.6.1",
+    "supabase-js": "^0.0.1-security"
+  }
+}
