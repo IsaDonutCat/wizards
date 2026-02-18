@@ -8,7 +8,7 @@
 async function main() {
 
    const supabase = createClient(supaUrl, supaKey);
-   const stuData = await supabase.from("SrtudentRoster").select('*');
+   const stuData = await supabase.from("Students").select('*');
    console.log(stuData)
 for (const student of stuData.data)
 {
@@ -17,12 +17,12 @@ for (const student of stuData.data)
    const stuId = student.StudentID;
    const totCouData = [];
    const couData = await supabase
-  .from('CourseListing')
+  .from('Courses')
   .select('CourseCode')
   .like('CourseCode', `${year}%`);
   couData.data.forEach((str)=> (totCouData.push(str)));
   const couDataPlus = await supabase
-  .from('CourseListing')
+  .from('Courses')
   .select('CourseCode')
   .like('CourseCode', `${year+1}%`);
    couDataPlus.data.forEach((str)=> (totCouData.push(str)));
@@ -33,7 +33,7 @@ for (const student of stuData.data)
    {
       courseNum = "Course" + (i+1);
       const { addErr } = await supabase
-      .from('Sheet3')
+      .from('Schedules')
       .update({ [courseNum]: `${totCouData[i].CourseCode}` })
       .eq('StudentID', `${stuId}`)
 
@@ -44,7 +44,7 @@ for (const student of stuData.data)
       }
    }
       let test = await supabase
-      .from('Sheet3')
+      .from('Schedules')
       .select()
       .eq('StudentID', `${stuId}`)
       console.log(test.data)
